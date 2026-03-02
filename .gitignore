@@ -1,0 +1,54 @@
+# ==========================================
+# Quartus Prime .gitignore
+# ==========================================
+
+# Quartus Generated Directories (Huge compilation files)
+db/
+incremental_db/
+output_files/
+simulation/
+timing/
+greybox_tmp/
+hc_output/
+.qsys_edit/
+
+# Quartus Generated Reports and Logs
+*.rpt
+*.smsg
+*.summary
+*.done
+*.jdi
+*.pin
+*.qws
+*.bak
+*.srf
+*.qws
+*.eqn
+*.cmp
+
+# Hardware Programming Files (Bitstreams)
+# Note: Some people like to keep final .sof files, but it's usually better to build them fresh
+*.sof
+*.pof
+*.jam
+*.jbc
+*.ekp
+*.jic
+
+# Qsys/Platform Designer generated files
+*.sopcinfo
+*.csv
+*.html
+*.txt
+# (Exception: Keep the main .qsys or .ip files if you use them)
+
+# Simulation/ModelSim Generated Files
+work/
+transcript
+*.wlf
+*.vcd
+*.do~
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
