@@ -38,7 +38,7 @@ module memory_system (
     .numwords_a(256),
     .outdata_reg_a("UNREGISTERED"),
     .width_byteena_a(4),
-    .init_file("program.hex"), 
+    .init_file("program.mif"), //can replace with [program file name].hex if using intel hex format
     .ram_block_type("M9K")
   ) m9k_block (
     .clock0    (clk_i),
