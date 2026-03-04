@@ -115,13 +115,6 @@ Once the processor is running, use the defined hardware keys to interact with th
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 ## Contact
 
 Simon (Zixuan) Yin - [GitHub Profile](https://github.com/BigSwastaken)
