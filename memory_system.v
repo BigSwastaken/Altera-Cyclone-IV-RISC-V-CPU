@@ -10,18 +10,18 @@ module memory_system (
   reg [3:0]  write_mask;
   reg [31:0] aligned_wdata;
 
-  // write mask and alignment generation
+  //write mask and alignment generation
   always @(*) begin
     case (mem_size_i)
-      3'b000: begin // SB 
+      3'b000: begin //SB 
         write_mask    = 4'b0001 << addr_i[1:0];
         aligned_wdata = {4{wdata_i[7:0]}}; 
       end
-      3'b001: begin // SH 
+      3'b001: begin //SH 
         write_mask    = 4'b0011 << {addr_i[1], 1'b0};
         aligned_wdata = {2{wdata_i[15:0]}};
       end
-      default: begin // SW 
+      default: begin //SW 
         write_mask    = 4'b1111; 
         aligned_wdata = wdata_i;
       end
@@ -30,7 +30,7 @@ module memory_system (
 
   wire [3:0] byte_we = {4{we_i}} & write_mask; //generate byte enables based on mem_size and we_i
 
-  // direct silicon primitive for Altera M9K RAM block
+  //direct silicon primitive for Altera M9K RAM block
   altsyncram #(
     .operation_mode("SINGLE_PORT"),
     .width_a(32),
@@ -48,13 +48,5 @@ module memory_system (
     .byteena_a (byte_we),
     .q_a       (rdata_o)
   );
-
-  // synthesis translate_off
-  // for simulation purposes 
-  reg [31:0] ram [0:255];
-  initial begin
-    $readmemh("program.hex", ram);
-  end
-  // synthesis translate_on
 
 endmodule
