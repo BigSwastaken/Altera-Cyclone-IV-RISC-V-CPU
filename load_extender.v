@@ -22,11 +22,11 @@ module load_extender (
     endcase
 
     case (mem_size_i) //apply sign/zero extension based on MemSize
-      3'b000:  read_data_ext_o = {{24{byte_data[7]}}, byte_data};    // LB  (Sign-Extend Byte)
-      3'b001:  read_data_ext_o = {{16{half_data[15]}}, half_data};   // LH  (Sign-Extend Halfword)
-      3'b010:  read_data_ext_o = read_data_i;                        // LW  (Pass Word)
-      3'b100:  read_data_ext_o = {24'b0, byte_data};                 // LBU (Zero-Extend Byte)
-      3'b101:  read_data_ext_o = {16'b0, half_data};                 // LHU (Zero-Extend Halfword)
+      3'b000:  read_data_ext_o = {{24{byte_data[7]}}, byte_data};    // LB (sign-extend byte)
+      3'b001:  read_data_ext_o = {{16{half_data[15]}}, half_data};   // LH  (sign-extend halfword)
+      3'b010:  read_data_ext_o = read_data_i;                        // LW  (word no extension)
+      3'b100:  read_data_ext_o = {24'b0, byte_data};                 // LBU (zero-extend byte)
+      3'b101:  read_data_ext_o = {16'b0, half_data};                 // LHU (zero-extend halfword)
       default: read_data_ext_o = read_data_i;                        // default to full word for unknown MemSize
     endcase
   end
