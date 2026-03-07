@@ -15,6 +15,7 @@ module control_fsm (
   //state encoding
   localparam [3:0] FETCH      = 4'b0000,
                    DECODE     = 4'b0001,
+                   FETCH_REGS = 4'b1101, //NEW: wait for M9K block RAM to output register data
                    EXEC_R     = 4'b0010, 
                    EXEC_I     = 4'b0011, 
                    MEM_ADR    = 4'b0100, //calculate memory address for Load/Store
@@ -55,6 +56,12 @@ module control_fsm (
       FETCH:      state_d = FETCH_WAIT; //wait one cycle to capture instruction from memory
       FETCH_WAIT: state_d = DECODE; 
       DECODE: begin
+        //all instructions need to wait one cycle for the M9K blocks to fetch rs1 and rs2
+        state_d = FETCH_REGS; 
+      end
+      
+      FETCH_REGS: begin
+        //now that registers are fetched, branch to execution paths
         case (opcode_i)
           OP_R_TYPE: state_d = EXEC_R;  
           OP_I_TYPE: state_d = EXEC_I;  

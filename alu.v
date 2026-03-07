@@ -43,7 +43,8 @@ module alu (
   wire        is_shift_left  = (alu_control_i == ALU_SLL);
   wire        is_arith_shift = (alu_control_i == ALU_SRA);
   wire [31:0] shifter_in     = is_shift_left ? reverse_32(src_a_i) : src_a_i;
-  wire [31:0] shifter        = $signed({is_arith_shift & src_a_i[31], shifter_in}) >>> src_b_i[4:0];
+  wire [32:0] shifter_33     = $signed({is_arith_shift & src_a_i[31], shifter_in}) >>> src_b_i[4:0];
+  wire [31:0] shifter        = shifter_33[31:0]; //optional, line 46 can automatically truncate to 32 bits, but this makes it explicit
   wire [31:0] left_shift     = reverse_32(shifter);
 
   always @(*) begin
